@@ -30,23 +30,27 @@ function applyPunishment(player, hoursStudied) {
     return player
 }
 
-function endOfDay(player, hoursStudied, quizCompleted) {
+function endOfDay(player, sessions, quizCompleted) {
     // Validate hours against max limit
-    hoursStudied = validateHours(player, hoursStudied)
+    let totalHours = 0
+    for (let i = 0; i < sessions.length; i++) {
+    totalHours += sessions[i].hours
+    console.log("📖", sessions[i].course, "→", sessions[i].hours, "hrs")
+}
 
     // Show break reminders
-    checkBreaks(hoursStudied)
+    checkBreaks(totalHours )
 
-    let goalMet = hoursStudied >= player.dailyGoalHours
+    let goalMet = totalHours  >= player.dailyGoalHours
 
     console.log("=============================")
     console.log("📅 END OF DAY —", player.name)
     console.log("=============================")
-    console.log("🎯 Goal:", player.dailyGoalHours, "hrs | Studied:", hoursStudied, "hrs")
+    console.log("🎯 Goal:", player.dailyGoalHours, "hrs | Studied:", totalHours , "hrs")
     console.log("✅ Goal met:", goalMet)
 
     if (goalMet) {
-        let earned = calculateXP(hoursStudied, quizCompleted)
+        let earned = calculateXP(totalHours , quizCompleted)
         player = addXP(player, earned)
         player.streak += 1
         player.streak > player.longestStreak
@@ -55,10 +59,10 @@ function endOfDay(player, hoursStudied, quizCompleted) {
         console.log("⚡ XP earned:", earned)
         console.log("🔥 Streak:", player.streak, "days")
     } else {
-        let earned = calculateXP(hoursStudied, quizCompleted)
+        let earned = calculateXP(totalHours , quizCompleted)
         player = addXP(player, earned)
         console.log("⚡ XP earned for studied hours:", earned)
-        player = applyPunishment(player, hoursStudied)
+        player = applyPunishment(player, totalHours )
         player.streak = 0
         console.log("💔 Streak reset to 0")
     }

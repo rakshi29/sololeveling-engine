@@ -2,19 +2,32 @@ const { createPlayer } = require('./player.js')
 const { endOfDay } = require('./session.js')
 const { createCourse, addStudyHours, addQuizScore, addNote, getCourseReport } = require('./courses.js')
 
-let raksh = createPlayer("Raksh", 4, 6)  // 4hr goal, 6hr max
+let raksh = createPlayer("Raksh", 4, 6)
 
 console.log("\n--- DAY 1: Normal day ---")
-raksh = endOfDay(raksh, 4, true)
+raksh = endOfDay(raksh, [
+    { course: "Java", hours: 2 },
+    { course: "Math", hours: 2 }
+], true)
 
 console.log("\n--- DAY 2: Long study day ---")
-raksh = endOfDay(raksh, 6, true)
+raksh = endOfDay(raksh, [
+    { course: "Java", hours: 3 },
+    { course: "Math", hours: 2 },
+    { course: "ServiceNow", hours: 1 }
+], true)
 
-console.log("\n--- DAY 3: Exceeds max ---")
-raksh = endOfDay(raksh, 10, false)  // should cap at 6
+console.log("\n--- DAY 3: Missed goal ---")
+raksh = endOfDay(raksh, [
+    { course: "Java", hours: 1 },
+    { course: "Math", hours: 1 }
+], false)
 
-console.log("\n--- DAY 4: Missed goal ---")
-raksh = endOfDay(raksh, 2, false)
+console.log("\n--- DAY 4: Recovery ---")
+raksh = endOfDay(raksh, [
+    { course: "Java", hours: 2 },
+    { course: "ServiceNow", hours: 2 }
+], true)
 
 console.log("\n--- COURSE TRACKING ---")
 let java = createCourse("Java", "#FF5722")
