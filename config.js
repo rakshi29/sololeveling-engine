@@ -14,24 +14,28 @@ const CONFIG = {
 
     // Study Goals
     study: {
-        minimumHours: 1,      // user can set their own, this is the floor
-        defaultDailyHours: 4, // suggested default
+        minimumHours: 1,
+        defaultDailyHours: 4,
+    },
+
+    // Study Limits
+    limits: {
+        defaultMaxHours: 8,
+        breakEveryHours: 2,
     },
 
     // Punishment Settings
     punishment: {
-        missedByLessThan1Hour: -2,
-        missedBy1to2Hours: -5,
-        missedByMoreThan2Hours: -10,
+        xpPerMissedHour: 1,
     },
 
     // Level System
     levels: {
-        daysPerLevel: 7,       // 7 consecutive days = level up
+        daysPerLevel: 7,
         maxLevel: 100,
     },
 
-    // Badge Thresholds (streak days required)
+    // Badge Thresholds
     badges: {
         noviceWarrior: 7,
         disciplinedMage: 14,
@@ -39,12 +43,24 @@ const CONFIG = {
         legendLearner: 30,
     },
 
+    // Break Activities
+    breakActivities: [
+        "🧘 Take 5 deep breaths — inhale 4 counts, exhale 4 counts",
+        "💧 Drink a full glass of water right now",
+        "🚶 Stand up and walk around for 5 minutes",
+        "👁️  Look at something 20 feet away for 20 seconds — rest your eyes",
+        "🤸 Do 10 shoulder rolls and stretch your neck",
+        "🙆 Stand up and stretch your arms above your head for 30 seconds",
+        "😴 Close your eyes and rest them completely for 2 minutes",
+        "🦵 Do 10 squats — get the blood flowing",
+    ],
+
     // Chatbot (placeholder for future AI integration)
     chatbot: {
-        enabled: false,        // flip to true when we add AI
-        model: "gpt-4",        // ready for future use
+        enabled: false,
+        model: "gpt-4",
         personality: "strict motivational coach",
-    }
+    },
 }
 
 module.exports = CONFIG

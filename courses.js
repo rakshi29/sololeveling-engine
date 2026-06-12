@@ -6,7 +6,7 @@ const CONFIG = require('./config.js')
 
 function createCourse(name, color) {
     return {
-        id: Date.now(),        // unique ID using timestamp
+        id: Date.now(),
         name: name,
         color: color,
         totalHoursStudied: 0,
@@ -55,10 +55,10 @@ function getCourseReport(course) {
     console.log("=============================")
 }
 
-module.exports = { 
-    createCourse, 
-    addStudyHours, 
-    addQuizScore, 
-    addNote, 
-    getCourseReport 
+module.exports = {
+    createCourse,
+    addStudyHours,
+    addQuizScore,
+    addNote,
+    getCourseReport
 }

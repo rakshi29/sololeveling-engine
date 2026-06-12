@@ -1,16 +1,34 @@
 const { createPlayer } = require('./player.js')
 const { endOfDay } = require('./session.js')
+const { createCourse, addStudyHours, addQuizScore, addNote, getCourseReport } = require('./courses.js')
 
-let raksh = createPlayer("Raksh", 4)  // 4 hour daily goal
+let raksh = createPlayer("Raksh", 4, 6)  // 4hr goal, 6hr max
 
-console.log("\n--- DAY 1: Full goal met ---")
-raksh = endOfDay(raksh, 4, true)   // 4hrs + quiz → 12 XP
+console.log("\n--- DAY 1: Normal day ---")
+raksh = endOfDay(raksh, 4, true)
 
-console.log("\n--- DAY 2: Half goal met ---")
-raksh = endOfDay(raksh, 2, false)  // +4 XP earned, -2 XP penalty = net +2
+console.log("\n--- DAY 2: Long study day ---")
+raksh = endOfDay(raksh, 6, true)
 
-console.log("\n--- DAY 3: Almost nothing ---")
-raksh = endOfDay(raksh, 1, false)  // +2 XP earned, -3 XP penalty = net -1 but floor is 0
+console.log("\n--- DAY 3: Exceeds max ---")
+raksh = endOfDay(raksh, 10, false)  // should cap at 6
 
-console.log("\n--- DAY 4: Full recovery ---")
-raksh = endOfDay(raksh, 4, true)   // back to full, streak rebuilds
+console.log("\n--- DAY 4: Missed goal ---")
+raksh = endOfDay(raksh, 2, false)
+
+console.log("\n--- COURSE TRACKING ---")
+let java = createCourse("Java", "#FF5722")
+java = addStudyHours(java, 3)
+java = addQuizScore(java, 88)
+java = addNote(java, "Finished OOP chapter")
+getCourseReport(java)
+
+console.log("\n--- PLAYER SUMMARY ---")
+console.log("Name:", raksh.name)
+console.log("Level:", raksh.level)
+console.log("XP:", raksh.xp)
+console.log("Streak:", raksh.streak)
+console.log("Longest streak:", raksh.longestStreak)
+console.log("Daily goal:", raksh.dailyGoalHours, "hrs")
+console.log("Daily max:", raksh.maxDailyHours, "hrs")
+console.log("Badges:", raksh.badges)
